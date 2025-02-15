@@ -1,0 +1,288 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps is in preview. The schema is being actively developed.
+# Content may be incomplete and subject to change.
+# This file is read-only and should only be used to review changes made within Power Apps Studio.
+# This file isn't used when loading the app. External editing, merging and conflict resolution are
+# not supported.
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  BrowseScreen1:
+    Properties:
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+    Children:
+      - RectQuickActionBar1:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =RGBA(56, 96, 178, 1)
+            Height: =88
+            Width: =Parent.Width
+      - LblAppName1:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(58, 58, 58, 0)
+            Font: =Font.'Open Sans'
+            Height: =88
+            Size: =27
+            Text: ="Products"
+            Width: =Parent.Width - Self.X - IconSortUpDown1.Width - IconNewItem1.Width - IconRefresh1.Width
+            Wrap: =false
+            X: =20
+      - IconRefresh1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =88
+            Icon: =Icon.Reload
+            OnSelect: =Refresh([@Products])
+            PaddingBottom: =22
+            PaddingLeft: =22
+            PaddingRight: =22
+            PaddingTop: =22
+            PressedFill: =RGBA(255, 255, 255, 0.3)
+            TabIndex: =0
+            Tooltip: ="Refresh list"
+            Width: =88
+            X: =Parent.Width - IconNewItem1.Width - IconSortUpDown1.Width - Self.Width
+      - IconSortUpDown1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =88
+            Icon: =Icon.Sort
+            OnSelect: |-
+              =UpdateContext({SortDescending1: !SortDescending1})
+            PaddingBottom: =26
+            PaddingLeft: =26
+            PaddingRight: =26
+            PaddingTop: =26
+            PressedFill: =RGBA(255, 255, 255, 0.3)
+            TabIndex: =0
+            Tooltip: =If(SortDescending1, "Sort list in reverse alphabetical order", "Sort list in alphabetical order")
+            Width: =88
+            X: =Parent.Width - IconNewItem1.Width - Self.Width
+      - IconNewItem1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =If(DataSourceInfo([@Products], DataSourceInfo.CreatePermission), DisplayMode.Edit, DisplayMode.Disabled)
+            Height: =88
+            Icon: =Icon.Add
+            OnSelect: =NewForm(EditForm1);Navigate(EditScreen1, ScreenTransition.None)
+            PaddingBottom: =24
+            PaddingLeft: =24
+            PaddingRight: =24
+            PaddingTop: =24
+            PressedFill: =RGBA(255, 255, 255, 0.3)
+            TabIndex: =0
+            Tooltip: ="Create new item"
+            Width: =88
+            X: =Parent.Width - Self.Width
+      - TextSearchBox1:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            Align: =TextPosition.Left
+            BorderColor: =RGBA(0, 18, 107, 1)
+            BorderStyle: =BorderStyle.None
+            Default: =""
+            DelayOutput: =true
+            Font: =Font.'Open Sans'
+            Height: =68
+            HintText: ="Search items"
+            HoverBorderColor: =RGBA(0, 18, 107, 1)
+            HoverFill: =RGBA(186, 202, 226, 1)
+            PaddingLeft: =70
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =7
+            RadiusTopLeft: =0
+            RadiusTopRight: =7
+            Width: =Parent.Width/2
+            Y: =RectQuickActionBar1.Height
+      - SearchIcon1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(191, 190, 190, 1)
+            Height: =Self.Width
+            Icon: =Icon.Search
+            PaddingBottom: =14
+            PaddingLeft: =14
+            PaddingRight: =14
+            PaddingTop: =14
+            Tooltip: ="Search"
+            Width: =TextSearchBox1.Height
+            X: =TextSearchBox1.X
+            Y: =TextSearchBox1.Y
+      - Rectangle11:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =RGBA(0, 18, 107, 1)
+            Height: =2
+            Width: =Parent.Width
+            Y: =TextSearchBox1.Y + TextSearchBox1.Height
+      - BrowseGallery1:
+          Control: Gallery@2.15.0
+          Variant: BrowseLayout_Vertical_OneTextVariant_ver4.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Height: =Parent.Height - Self.Y
+            Items: |-
+              =SortByColumns(
+                  Search(
+                      Filter([@Products],IsBlank('Visibility filter'.Selected) || 'Product visibility' = 'Visibility filter'.Selected.Value),
+                      TextSearchBox1.Text,
+                      contoso_name
+                  ),
+                  "contoso_name",
+                  If(
+                      SortDescending1,
+                      SortOrder.Descending,
+                      SortOrder.Ascending
+                  )
+              )
+            OnSelect: =
+            ShowScrollbar: =false
+            TemplateSize: =230
+            Width: =Parent.Width
+            Y: =TextSearchBox1.Y + TextSearchBox1.Height
+          Children:
+            - Title1:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Semibold
+                  Height: =Self.Size * 1.8
+                  OnSelect: =Select(Parent)
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =20
+                  Text: =ThisItem.Name
+                  VerticalAlign: =VerticalAlign.Top
+                  Width: =Parent.TemplateWidth - 104
+                  X: =14
+                  Y: =20
+            - NextArrow1:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  AccessibleLabel: =Self.Tooltip
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Height: =60
+                  Icon: =Icon.ChevronRight
+                  OnSelect: =Navigate(DetailScreen1, ScreenTransition.None)
+                  PaddingBottom: =10
+                  PaddingLeft: =10
+                  PaddingRight: =10
+                  PaddingTop: =10
+                  TabIndex: =0
+                  Tooltip: ="View item details"
+                  Width: =60
+                  X: =Parent.TemplateWidth - Self.Width - 5
+                  Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            - Separator1:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =RGBA(0, 18, 107, 1)
+                  Height: =1
+                  OnSelect: =Select(Parent)
+                  Width: =Parent.TemplateWidth
+                  Y: =Parent.TemplateHeight - 1
+            - Dropdown1:
+                Control: Classic/DropDown@2.3.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  Default: =ThisItem.'Product visibility'
+                  Font: =Font.'Open Sans'
+                  Height: =47
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =Choices(Products.'Product visibility')
+                  OnChange: =Patch(Products,ThisItem,{'Product visibility':Self.Selected.Value})
+                  OnSelect: =Select(Parent)
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  X: =14
+                  Y: =80
+            - Channels:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  OnSelect: =Select(Parent)
+                  Text: =Concat(ThisItem.'Sales channels',Text(Value),",")
+                  X: =14
+                  Y: =143
+            - Rectangle1:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =Switch(ThisItem.'Product visibility', chProductVisibility.Private, Color.Red, chProductVisibility.Public, Color.Green, chProductVisibility.Invite, Color.Blue, Color.Black)
+                  Height: =220
+                  OnSelect: =Select(Parent)
+                  Width: =6
+            - Icon2:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Height: =51
+                  Icon: =Icon.Cancel
+                  OnSelect: |-
+                    =Collect(col_Empty, Blank());
+                    Patch(Products, ThisItem, {'Sales channels': col_Empty})
+                  Visible: =If(IsBlank(Channels.Text),false,true)
+                  Width: =40
+                  X: =575
+                  Y: =162
+      - Visibility filter:
+          Control: Classic/DropDown@2.3.1
+          Properties:
+            AllowEmptySelection: =true
+            BorderColor: =RGBA(0, 18, 107, 1)
+            ChevronBackground: =RGBA(56, 96, 178, 1)
+            ChevronFill: =RGBA(255, 255, 255, 1)
+            ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+            ChevronHoverFill: =RGBA(255, 255, 255, 1)
+            Default: =Blank()
+            Font: =Font.'Open Sans'
+            HoverFill: =RGBA(186, 202, 226, 1)
+            Items: =Choices(Products.'Product visibility')
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(0, 18, 107, 1)
+            SelectionColor: =RGBA(255, 255, 255, 1)
+            SelectionFill: =RGBA(56, 96, 178, 1)
+            Width: =Parent.Width/2 - 60
+            X: =320
+            Y: =86
+      - Icon1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(0, 18, 107, 1)
+            Height: =66
+            Icon: =Icon.Cancel
+            OnSelect: =Reset('Visibility filter')
+            Visible: =If(IsBlank('Visibility filter'),false,true)
+            Width: =60
+            X: =580
+            Y: =88

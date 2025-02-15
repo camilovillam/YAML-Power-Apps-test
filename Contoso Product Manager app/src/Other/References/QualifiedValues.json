@@ -1,0 +1,11 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_contoso_product_forms",
+      "Namespace": "Products (Forms)",
+      "Values": {
+        "Information": "7603bd41-79f7-4869-9ac2-dad3632adda2"
+      }
+    }
+  ]
+}

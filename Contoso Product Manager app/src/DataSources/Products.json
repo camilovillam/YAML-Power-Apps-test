@@ -1,0 +1,141 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "contoso_products",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "contoso_product",
+    "MaxGetRowsCount": 500,
+    "Name": "Products",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "contoso_name": "Name",
+      "contoso_product_AsyncOperations": "Trabajos del sistema",
+      "contoso_product_BulkDeleteFailures": "Errores de eliminación en masa",
+      "contoso_product_DuplicateBaseRecord": "Registros duplicados (contoso_product_DuplicateBaseRecord)",
+      "contoso_product_DuplicateMatchingRecord": "Registros duplicados (contoso_product_DuplicateMatchingRecord)",
+      "contoso_product_MailboxTrackingFolders": "Carpetas de seguimiento automático del buzón",
+      "contoso_product_PrincipalObjectAttributeAccesses": "Uso compartido de campos",
+      "contoso_product_ProcessSession": "Sesiones de proceso",
+      "contoso_product_SyncErrors": "Errores de sincronización",
+      "contoso_productid": "Product",
+      "contoso_productvisibility": "Product visibility",
+      "contoso_saleschannels": "Sales channels",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Número de versión"
+    },
+    "PreferredName": "Products",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Products (Views)",
+    "Name": "_contoso_product_views",
+    "RelatedEntityName": "Products",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "b6dfd22a-8cbd-434e-9a26-3fb931a89749": "Active Products",
+      "c00fa285-6035-4a23-8eb1-01daed3b91af": "Product Lookup View",
+      "c071e175-d12c-4555-b043-5030f7438e4d": "Product Advanced Find View",
+      "d37eccc1-c3ca-4af3-b9f0-989e019a2b0f": "Product Associated View",
+      "d5257ad9-440d-4443-bf88-2dd7eb738b47": "Inactive Products"
+    }
+  },
+  {
+    "DisplayName": "chProductVisibility",
+    "Name": "contoso_chproductvisibility",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Private",
+      "100000001": "Invite",
+      "100000002": "Public"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_productvisibility",
+        "OptionSetReferenceEntityName": "Products"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "contoso_productvisibility",
+    "RelatedEntityName": "Products",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "chSalesChannels",
+    "Name": "contoso_chsaleschannels",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Wholesale",
+      "100000001": "Retail",
+      "100000002": "Direct"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "contoso_saleschannels",
+        "OptionSetReferenceEntityName": "Products"
+      }
+    },
+    "OptionSetTypeKey": "MultiSelectPicklistType",
+    "RelatedColumnInvariantName": "contoso_saleschannels",
+    "RelatedEntityName": "Products",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Products)",
+    "Name": "contoso_product_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Products"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Products",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Products)",
+    "Name": "contoso_product_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Products"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Products",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,178 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps is in preview. The schema is being actively developed.
+# Content may be incomplete and subject to change.
+# This file is read-only and should only be used to review changes made within Power Apps Studio.
+# This file isn't used when loading the app. External editing, merging and conflict resolution are
+# not supported.
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  DetailScreen1:
+    Properties:
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+    Children:
+      - RectQuickActionBar2:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Fill: =RGBA(56, 96, 178, 1)
+            Height: =88
+            Width: =Parent.Width
+      - IconBackarrow1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =88
+            Icon: =Icon.ChevronLeft
+            OnSelect: =Navigate(BrowseScreen1, ScreenTransition.None)
+            PaddingBottom: =24
+            PaddingLeft: =24
+            PaddingRight: =24
+            PaddingTop: =24
+            PressedFill: =RGBA(255, 255, 255, 0.3)
+            TabIndex: =0
+            Tooltip: ="Back to list"
+            Width: =88
+      - IconEdit1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =If(DataSourceInfo([@Products], DataSourceInfo.EditPermission), DisplayMode.Edit, DisplayMode.Disabled)
+            Height: =88
+            Icon: =Icon.Edit
+            OnSelect: =EditForm(EditForm1);Navigate(EditScreen1, ScreenTransition.None)
+            PaddingBottom: =24
+            PaddingLeft: =24
+            PaddingRight: =24
+            PaddingTop: =24
+            PressedFill: =RGBA(255, 255, 255, 0.3)
+            TabIndex: =0
+            Tooltip: ="Edit this item"
+            Width: =88
+            X: =Parent.Width - Self.Width
+      - IconDelete1:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            AccessibleLabel: =Self.Tooltip
+            BorderColor: =RGBA(0, 18, 107, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =If(!IsBlank(BrowseGallery1.Selected) && DataSourceInfo([@Products], DataSourceInfo.DeletePermission), DisplayMode.Edit, DisplayMode.Disabled)
+            Height: =88
+            Icon: =Icon.Trash
+            OnSelect: =Remove([@Products], BrowseGallery1.Selected); If (IsEmpty(Errors([@Products], BrowseGallery1.Selected)), Back())
+            PaddingBottom: =24
+            PaddingLeft: =24
+            PaddingRight: =24
+            PaddingTop: =24
+            PressedFill: =RGBA(255, 255, 255, 0.3)
+            TabIndex: =0
+            Tooltip: ="Delete this item"
+            Width: =88
+            X: =Parent.Width - IconEdit1.Width - Self.Width
+      - LblAppName2:
+          Control: Label@2.5.1
+          Properties:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Open Sans'
+            Height: =88
+            Size: =27
+            Text: ="Products"
+            Width: =Parent.Width - Self.X - IconDelete1.Width - IconEdit1.Width
+            Wrap: =false
+            X: =IconBackarrow1.X + IconBackarrow1.Width
+      - DetailForm1:
+          Control: FormViewer@2.3.4
+          Properties:
+            BorderColor: =RGBA(0, 18, 107, 1)
+            DataSource: =[@Products]
+            Height: =Parent.Height - DetailForm1.Y
+            Item: =BrowseGallery1.Selected
+            Width: =Parent.Width
+            Y: =RectQuickActionBar2.Y + RectQuickActionBar2.Height
+          Children:
+            - Created On_DataCard1:
+                Control: TypedDataCard@1.0.6
+                Variant: ClassicTextualView
+                IsLocked: true
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  DataField: ="createdon"
+                  Default: =ThisItem.'Created On'
+                  DisplayName: ="Created On"
+                  Required: =false
+                  Y: =8
+                Children:
+                  - DataCardKey2:
+                      Control: Label@2.5.1
+                      Properties:
+                        AutoHeight: =true
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        Color: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        Height: =48
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                  - DataCardValue2:
+                      Control: Label@2.5.1
+                      Properties:
+                        AutoHeight: =true
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        DisplayMode: =Parent.DisplayMode
+                        Font: =Font.'Open Sans'
+                        Height: =40
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Default
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey2.Y + DataCardKey2.Height + 5
+            - Name_DataCard1:
+                Control: TypedDataCard@1.0.6
+                Variant: ClassicTextualView
+                IsLocked: true
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  DataField: ="contoso_name"
+                  Default: =ThisItem.Name
+                  DisplayName: ="Name"
+                  Required: =true
+                  Y: =9
+                Children:
+                  - DataCardKey1:
+                      Control: Label@2.5.1
+                      Properties:
+                        AutoHeight: =true
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        Color: =RGBA(0, 18, 107, 1)
+                        Font: =Font.'Open Sans'
+                        Height: =48
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                  - DataCardValue1:
+                      Control: Label@2.5.1
+                      Properties:
+                        AutoHeight: =true
+                        BorderColor: =RGBA(0, 18, 107, 1)
+                        DisplayMode: =Parent.DisplayMode
+                        Font: =Font.'Open Sans'
+                        Height: =40
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Default
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey1.Y + DataCardKey1.Height + 5
