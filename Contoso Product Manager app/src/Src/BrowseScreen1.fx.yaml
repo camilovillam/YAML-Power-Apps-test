@@ -51,7 +51,7 @@
         DisplayMode: =If(DataSourceInfo([@Products], DataSourceInfo.CreatePermission), DisplayMode.Edit, DisplayMode.Disabled)
         Height: =88
         Icon: =Icon.Add
-        OnSelect: =NewForm(EditForm1);Navigate(EditScreen1, ScreenTransition.None)
+        OnSelect: =NewForm(EditForm1);Navigate(EditScreen1, ScreenTransition.UnCover)
         PaddingBottom: =24
         PaddingLeft: =24
         PaddingRight: =24
